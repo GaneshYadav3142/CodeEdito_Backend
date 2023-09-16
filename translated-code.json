@@ -1,3 +1,0 @@
-{
-  "code": "def findMaxArray(arr):\r\n  if len(arr) == 0:\r\n    return None  # Handle the case of an empty array\r\n\r\n  rightPointer = len(arr) - 1\r\n\r\n  max = float('-inf')  # Start with negative infinity as the initial maximum value\r\n\r\n  while leftPointer < rightPointer:\r\n    if arr[leftPointer] > max:\r\n      max = arr[leftPointer]\r\n\r\n    if arr[rightPointer] > max:\r\n      max = arr[rightPointer]\r\n\r\n    leftPointer += 1\r\n    rightPointer -= 1\r\n\r\n  return max\r\n}\r\n\r\n"
-}
