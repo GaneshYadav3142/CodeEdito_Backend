@@ -21,14 +21,14 @@ app.use(cors())
 const apiKey = process.env.OPENAI_API_KEY // Replace with your actual OpenAI API key
  const openai = new OpenAI({ apiKey });
  
- const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN, // Replace with your PAT
+//  const octokit = new Octokit({
+//   auth: process.env.GITHUB_TOKEN, // Replace with your PAT
  
-});
+// });
 
-const axiosInstance = axios.create({
-  baseURL: 'http://localhost:5000', // Replace with your actual server URL
-});
+// const axiosInstance = axios.create({
+//   baseURL: 'http://localhost:5000', // Replace with your actual server URL
+// });
 
 app.post('/convert', async (req, res) => {
   try {
@@ -101,37 +101,37 @@ app.post('/quality', async (req, res) => {
 });
 
 
-app.post("/github-push", async (req, res) => {
-  try {
-    // Get the code to push from the request body
-    const { sourceCode } = req.body;
+// app.post("/github-push", async (req, res) => {
+//   try {
+//     // Get the code to push from the request body
+//     const { sourceCode } = req.body;
 
-    // Specify GitHub repository details
-    const repoOwner = "GaneshYadav3142"; // Your GitHub username
-    const repoName = "CodeEditor_Code_Pushing_TestingRepo"; // Your GitHub repository name
-    const filePath = "./translated-code.json"; // Specify the file path
+//     // Specify GitHub repository details
+//     const repoOwner = "GaneshYadav3142"; // Your GitHub username
+//     const repoName = "CodeEditor_Code_Pushing_TestingRepo"; // Your GitHub repository name
+//     const filePath = "./translated-code.json"; // Specify the file path
 
-    // Create a JSON file with the code to push
-    fs.writeFileSync(filePath, JSON.stringify({ code: sourceCode }, null, 2));
+//     // Create a JSON file with the code to push
+//     fs.writeFileSync(filePath, JSON.stringify({ code: sourceCode }, null, 2));
 
-    const response = await octokit.repos.createOrUpdateFileContents({
-      owner: repoOwner,
-      repo: repoName,
-      path: "/translated-code.json",
-      message: "Add code to push", // Commit message
-      content: fs.readFileSync(filePath).toString("base64"),
-    });
+//     const response = await octokit.repos.createOrUpdateFileContents({
+//       owner: repoOwner,
+//       repo: repoName,
+//       path: "/translated-code.json",
+//       message: "Add code to push", // Commit message
+//       content: fs.readFileSync(filePath).toString("base64"),
+//     });
 
-    // Push the file to GitHub using the PAT
-    console.log(response)
+//     // Push the file to GitHub using the PAT
+//     console.log(response)
 
-    // The response contains information about the commit
-    res.json({ githubResponse: response.data });
-  } catch (error) {
-    console.error("GitHub Push Error:", error.message);
-    res.status(500).json({ error: "GitHub Push Failed" });
-  }
-});
+//     // The response contains information about the commit
+//     res.json({ githubResponse: response.data });
+//   } catch (error) {
+//     console.error("GitHub Push Error:", error.message);
+//     res.status(500).json({ error: "GitHub Push Failed" });
+//   }
+// });
 
 
 
